@@ -1,15 +1,47 @@
+import React from "react"
+import Title from "./title"
+import Die from "./die"
+import RollButton from "./rollbutton"
+
 export default function Main() {
+    newDie()
+
+    const [dieState, setDieState] = React.useState(newDie())
+
+    console.log(dieState)
+
+    let dieElement = dieState.map((dieNum, dieIndex) => {
+        return <Die key={dieIndex} value={dieNum} />
+    })
+
+    function newDie() {
+
+        let dieArray = []
+        for (let i = 0; i < 10; i++) {
+            dieArray.push(Math.ceil(Math.random() * 6))
+        }
+        console.log(dieArray)
+        return dieArray
+
+    }
+
+    function rollDice() {
+
+        setDieState(prev => {
+            return (
+                newDie())
+        })
+    }
 
     return (
         <div className="game-container">
             <div className="outer-frame">
                 <div className="inner-frame">
-                    <h1 className="title">Tenzies</h1>
-                    <p className="title-paragraph">Roll until all dice are the same. Click each die to freeze it at its current value between rolls.</p>
+                    <Title />
                     <div className="die-container">
-                        <div className="die">1</div>
+                        {dieElement}
                     </div>
-                    <button className="roll-button">Roll</button>
+                    <RollButton handleClick={rollDice} />
                 </div>
             </div>
         </div>
