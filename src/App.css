@@ -1,38 +1,87 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Karla&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Inter&display=swap');
+
+* {
+  margin: 0px;
+  box-sizing: border-box;
+  font-family: 'Karla', sans-serif;
+
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.game-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 69px;
+  margin-bottom: 69px;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.outer-frame {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 360px;
+  height: 379px;
+  background-color: #0B2434;
+
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.inner-frame {
   display: flex;
   flex-direction: column;
   align-items: center;
+  width: 320px;
+  height: 320px;
+  background-color: #F5F5F5;
+  border-radius: 10px;
+}
+
+.title {
+  margin-top: 33.3px;
+  font-weight: 700;
+  font-size: 25.6px;
+  line-height: 30px;
+  text-align: center;
+  letter-spacing: -0.03em;
+}
+
+.title-paragraph {
+  font-family: 'Inter', sans-serif;
+  font-weight: 400;
+  font-size: 13.11px;
+  line-height: 16px;
+  text-align: center;
+  width: 233px;
+  letter-spacing: -0.03em;
+}
+
+.die {
+  display: flex;
+  margin-top: 23.1px;
+  width: 36px;
+  height: 36px;
+  font-weight: 700;
+  font-size: 20.6px;
+  line-height: 24px;
+  align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  text-align: center;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.15);
+  border-radius: 3.81277px;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.roll-button {
+  margin-top: 25.6px;
+  font-weight: 700;
+  font-size: 16.39px;
+  line-height: 19px;
+  text-align: center;
+  width: 92px;
+  height: 35.9px;
+  color: #FFFFFF;
+  background: #5035FF;
+  border: none;
+  box-shadow: 0px 3.2px 7.68px rgba(0, 0, 0, 0.18);
+  border-radius: 3.8px;
 }
