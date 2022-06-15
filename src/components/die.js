@@ -1,5 +1,9 @@
 export default function Die(props) {
+    const styles = {
+        backgroundColor: props.held ? "green" : "white"
+    }
+
     return (
-        <div className="die">{props.value}</div>
+        <div style={styles} onClick={props.selectDie} className="die" > {props.value} </div >
     )
 }

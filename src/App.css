@@ -78,8 +78,8 @@
   font-size: 16.39px;
   line-height: 19px;
   text-align: center;
-  width: 92px;
-  height: 35.9px;
+  width: 100px;
+  height: 50px;
   letter-spacing: 0.03em;
   color: #FFFFFF;
   background: #5035FF;
@@ -87,6 +87,10 @@
   box-shadow: 0px 3.2px 7.68px rgba(0, 0, 0, 0.18);
   border-radius: 3.8px;
   cursor: pointer;
+}
+
+.roll-button:active {
+  box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
 }
 
 .die-container {
