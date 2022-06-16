@@ -9,12 +9,23 @@
 
 }
 
+.conf {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  margin-top: 69px;
+  width: 340px;
+  height: 340px;
+}
+
 .game-container {
   display: flex;
   justify-content: center;
   margin-top: 69px;
   margin-bottom: 69px;
 }
+
 
 .outer-frame {
   position: relative;
@@ -26,6 +37,7 @@
   background-color: #0B2434;
 
 }
+
 
 .inner-frame {
   display: flex;

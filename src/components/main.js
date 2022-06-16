@@ -3,12 +3,15 @@ import Title from "./title"
 import Die from "./die"
 import RollButton from "./rollbutton"
 import { nanoid } from 'nanoid'
+import Confetti from "react-confetti"
 
 export default function Main() {
 
     const [dieState, setDieState] = React.useState(newDie())
 
     const [tenzies, setTenzies] = React.useState(false)
+
+    let numRolls = 0
 
     React.useEffect(() => {
 
@@ -36,11 +39,19 @@ export default function Main() {
     }
 
     function rollDice() {
-        setDieState(prev => {
-            return prev.map(item => {
-                return item.isHeld ? { ...item } : generateNewDie()
+        if (!tenzies) {
+            numRolls++
+            setDieState(prev => {
+                return prev.map(item => {
+                    return item.isHeld ? { ...item } : generateNewDie()
+                })
             })
-        })
+        } else {
+            setDieState(newDie())
+            setTenzies(false)
+            numRolls = 0
+
+        }
     }
 
 
@@ -74,9 +85,12 @@ export default function Main() {
 
 
     return (
+
         <div className="game-container">
+            {tenzies && <Confetti className="conf" width={320} height={320}></Confetti>}
             <div className="outer-frame">
                 <div className="inner-frame">
+
                     <Title />
                     <div className="die-container">
                         {dieElement}
