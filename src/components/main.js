@@ -25,9 +25,24 @@ export default function Main() {
 
     const [timeOn, setTimeOn] = React.useState(false)
 
-    const [rollScore, setRollScore] = React.useState(localStorage.getItem("rolls"))
+    const [rollScore, setRollScore] = React.useState(localStorage.getItem("rolls") || 0)
 
-    const [timeScore, setTimeScore] = React.useState(`0:${localStorage.getItem("time").slice(0, 2)}`)
+    const [timeScore, setTimeScore] = React.useState(`0:${localStorage.getItem("time")?.slice(0, 2) || 0}`)
+
+
+
+    React.useEffect(() => {
+        if (rollScore === 0) {
+            localStorage.setItem("rolls", 0)
+        }
+
+        if (timeScore === "0:0") {
+            localStorage.setItem("time", 0)
+        }
+
+        console.log("running initializer")
+
+    }, [])
 
     if (tenzies) {
         if (rollScore > numRolls) {
@@ -35,23 +50,28 @@ export default function Main() {
             localStorage.setItem("rolls", JSON.stringify(numRolls))
             setRollScore(rollSpan.textContent)
             console.log("newrollscore")
+        } else if (rollScore === 0) {
+            newRoll = true
+            localStorage.setItem("rolls", JSON.stringify(numRolls))
+            setRollScore(rollSpan.textContent)
+            console.log("newrollscore")
         }
     }
 
-    React.useEffect(() => {
-
-        if (tenzies) {
-            if (timeScore > theTime) {
-                localStorage.setItem("time", JSON.stringify(theTime))
-                setTimeScore(timeSpan.textContent)
-                console.log("newTime score")
-            }
+    if (tenzies) {
+        if (timeScore > theTime) {
+            localStorage.setItem("time", JSON.stringify(theTime))
+            setTimeScore(timeSpan.textContent)
+            console.log("newTime score")
+        } else if (timeScore === "0:0") {
+            newTime = true
+            localStorage.setItem("time", JSON.stringify(theTime))
+            setTimeScore(timeSpan.textContent)
+            console.log("newTime score")
+        } else {
+            console.log("shit aint working")
         }
-
-    }, [timeOn])
-
-
-
+    }
 
     React.useEffect(() => {
 
