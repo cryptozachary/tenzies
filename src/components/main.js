@@ -25,9 +25,9 @@ export default function Main() {
 
     const [timeOn, setTimeOn] = React.useState(false)
 
-    const [rollScore, setRollScore] = React.useState(localStorage.getItem("rolls") || 0)
+    const [rollScore, setRollScore] = React.useState(localStorage.getItem("rolls") || "0")
 
-    const [timeScore, setTimeScore] = React.useState(`0:${localStorage.getItem("time")?.slice(0, 2) || 0}`)
+    const [timeScore, setTimeScore] = React.useState(localStorage.getItem("time") || "0:0")
 
 
 
@@ -38,19 +38,22 @@ export default function Main() {
 
         if (timeScore === "0:0") {
             localStorage.setItem("time", 0)
+        } else {
+            setTimeScore(prev => {
+                let newScoreString = `0:${prev?.slice(0, 2)}`
+                return newScoreString
+            })
         }
 
-        console.log("running initializer")
+        console.log("running initializer", timeScore, rollScore)
 
     }, [])
 
     if (tenzies) {
+        console.log(`the #rolls is ${numRolls}`)
+        console.log(`the best score is ${rollScore}`)
+
         if (rollScore > numRolls) {
-            newRoll = true
-            localStorage.setItem("rolls", JSON.stringify(numRolls))
-            setRollScore(rollSpan.textContent)
-            console.log("newrollscore")
-        } else if (rollScore === 0) {
             newRoll = true
             localStorage.setItem("rolls", JSON.stringify(numRolls))
             setRollScore(rollSpan.textContent)
@@ -59,6 +62,19 @@ export default function Main() {
     }
 
     if (tenzies) {
+        if (rollScore === "0") {
+            newRoll = true
+            localStorage.setItem("rolls", JSON.stringify(numRolls))
+            setRollScore(rollSpan.textContent)
+            console.log("newrollscore")
+        }
+    }
+
+
+    if (tenzies) {
+
+        console.log(`the time is ${theTime}`)
+        console.log(`the best score is ${timeScore}`)
         if (timeScore > theTime) {
             localStorage.setItem("time", JSON.stringify(theTime))
             setTimeScore(timeSpan.textContent)
@@ -68,8 +84,6 @@ export default function Main() {
             localStorage.setItem("time", JSON.stringify(theTime))
             setTimeScore(timeSpan.textContent)
             console.log("newTime score")
-        } else {
-            console.log("shit aint working")
         }
     }
 
