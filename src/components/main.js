@@ -29,10 +29,8 @@ export default function Main() {
 
     const [timeScore, setTimeScore] = React.useState(localStorage.getItem("time") || "0:0")
 
-
-
     React.useEffect(() => {
-        if (rollScore === 0) {
+        if (rollScore === "0") {
             localStorage.setItem("rolls", 0)
         }
 
@@ -40,12 +38,17 @@ export default function Main() {
             localStorage.setItem("time", 0)
         } else {
             setTimeScore(prev => {
-                let newScoreString = `0:${prev?.slice(0, 2)}`
+                let newScoreString = prev
                 return newScoreString
             })
         }
 
         console.log("running initializer", timeScore, rollScore)
+
+
+        //testing out above time score
+        //let newScoreString = `0:${prev?.slice(0, 2)}`
+
 
     }, [])
 
