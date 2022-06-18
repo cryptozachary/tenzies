@@ -1,11 +1,19 @@
 import React from "react"
 import Title from "./title"
 import Die from "./die"
+import ShowInfo from "./showinfo"
 import RollButton from "./rollbutton"
 import { nanoid } from 'nanoid'
 import Confetti from "react-confetti"
+import BestScore from "./bestscore"
 
 export default function Main() {
+
+    let rollSpan = document.querySelector(".roll--span")
+    let timeSpan = document.querySelector(".time--span")
+    let newTime;
+    let newRoll;
+
 
     const [dieState, setDieState] = React.useState(newDie())
 
@@ -17,14 +25,42 @@ export default function Main() {
 
     const [timeOn, setTimeOn] = React.useState(false)
 
+    const [rollScore, setRollScore] = React.useState(localStorage.getItem("rolls"))
+
+    const [timeScore, setTimeScore] = React.useState(`0:${localStorage.getItem("time").slice(0, 2)}`)
+
+    if (tenzies) {
+        if (rollScore > numRolls) {
+            newRoll = true
+            localStorage.setItem("rolls", JSON.stringify(numRolls))
+            setRollScore(rollSpan.textContent)
+            console.log("newrollscore")
+        }
+    }
+
+    React.useEffect(() => {
+
+        if (tenzies) {
+            if (timeScore > theTime) {
+                localStorage.setItem("time", JSON.stringify(theTime))
+                setTimeScore(timeSpan.textContent)
+                console.log("newTime score")
+            }
+        }
+
+    }, [timeOn])
+
+
+
+
     React.useEffect(() => {
 
         let interval = 0
 
         if (timeOn) {
             interval = setInterval(() => {
-                setTheTime(prev => prev + 1)
-            }, 100)
+                setTheTime(prev => prev + 10)
+            }, 10)
         } else {
             clearInterval(interval)
 
@@ -81,7 +117,6 @@ export default function Main() {
 
     function newDie() {
 
-
         let dieArray = []
         for (let i = 0; i < 10; i++) {
             dieArray.push({ value: Math.ceil(Math.random() * 6), isHeld: false, id: nanoid() })
@@ -92,6 +127,7 @@ export default function Main() {
     function rollDice() {
 
         if (!tenzies) {
+            setTimeOn(true)
             setNumRoll(prev => {
                 let rolls = 0
                 rolls = prev + 1
@@ -107,9 +143,6 @@ export default function Main() {
             setTenzies(false)
             setNumRoll(0)
             setTheTime(0)
-
-
-
         }
     }
 
@@ -155,7 +188,9 @@ export default function Main() {
                     <div className="die-container">
                         {dieElement}
                     </div>
-                    <RollButton theTime={theTime} numRolls={numRolls} tenzie={tenzies} handleClick={rollDice} />
+                    <ShowInfo numRolls={numRolls} theTime={theTime} />
+                    <RollButton tenzie={tenzies} handleClick={rollDice} />
+                    <BestScore bestTime={timeScore} bestRolls={rollScore} />
                 </div>
             </div>
         </div>
