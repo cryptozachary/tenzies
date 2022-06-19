@@ -11,8 +11,10 @@ export default function Main() {
 
     let rollSpan = document.querySelector(".roll--span")
     let timeSpan = document.querySelector(".time--span")
+    let timeCalc = document.querySelector(".time-calc-span")
     let newTime;
     let newRoll;
+
 
 
     const [dieState, setDieState] = React.useState(newDie())
@@ -27,21 +29,22 @@ export default function Main() {
 
     const [rollScore, setRollScore] = React.useState(localStorage.getItem("rolls") || "0")
 
-    const [timeScore, setTimeScore] = React.useState(localStorage.getItem("time") || "0:0")
+    const [timeScore, setTimeScore] = React.useState(localStorage.getItem("time") || "0")
+
 
     React.useEffect(() => {
         if (rollScore === "0") {
             localStorage.setItem("rolls", 0)
         }
 
-        if (timeScore === "0:0") {
+        if (timeScore == "0") {
             localStorage.setItem("time", 0)
         } else {
-            setTimeScore(prev => {
-                let newScoreString = prev
-                return newScoreString
-            })
+            setTimeScore(timeScore)
         }
+
+
+
 
         console.log("running initializer", timeScore, rollScore)
 
@@ -52,43 +55,54 @@ export default function Main() {
 
     }, [])
 
-    if (tenzies) {
-        console.log(`the #rolls is ${numRolls}`)
-        console.log(`the best score is ${rollScore}`)
 
-        if (rollScore > numRolls) {
-            newRoll = true
-            localStorage.setItem("rolls", JSON.stringify(numRolls))
-            setRollScore(rollSpan.textContent)
-            console.log("newrollscore")
+
+    React.useEffect(() => {
+
+        if (tenzies) {
+            console.log(`the #rolls is ${numRolls}`)
+            console.log(`the best roll score is ${rollScore}`)
+
+            if (rollScore > numRolls) {
+                newRoll = true
+                localStorage.setItem("rolls", JSON.stringify(numRolls))
+                setRollScore(rollSpan.textContent)
+                console.log("newrollscore")
+            }
         }
-    }
 
-    if (tenzies) {
-        if (rollScore === "0") {
-            newRoll = true
-            localStorage.setItem("rolls", JSON.stringify(numRolls))
-            setRollScore(rollSpan.textContent)
-            console.log("newrollscore")
+        if (tenzies) {
+            if (rollScore === "0") {
+                newRoll = true
+                localStorage.setItem("rolls", JSON.stringify(numRolls))
+                setRollScore(rollSpan.textContent)
+                console.log("newrollscore2")
+            }
         }
-    }
+
+        if (tenzies) {
+
+            console.log(`the time is ${theTime}`)
+            console.log(`the best time score is ${timeScore}`)
+
+            if (timeScore > theTime) {
+                newTime = true
+                localStorage.setItem("time", JSON.stringify(theTime))
+                setTimeScore(timeSpan.textContent)
+                console.log("newTime score")
+            }
 
 
-    if (tenzies) {
-
-        console.log(`the time is ${theTime}`)
-        console.log(`the best score is ${timeScore}`)
-        if (timeScore > theTime) {
-            localStorage.setItem("time", JSON.stringify(theTime))
-            setTimeScore(timeSpan.textContent)
-            console.log("newTime score")
-        } else if (timeScore === "0:0") {
-            newTime = true
-            localStorage.setItem("time", JSON.stringify(theTime))
-            setTimeScore(timeSpan.textContent)
-            console.log("newTime score")
+            if (timeScore == "0") {
+                newTime = true
+                localStorage.setItem("time", JSON.stringify(theTime))
+                setTimeScore(timeSpan.textContent)
+                console.log("newTime score2")
+            }
         }
-    }
+
+    }, [tenzies])
+
 
     React.useEffect(() => {
 
@@ -161,6 +175,8 @@ export default function Main() {
         return dieArray
     }
 
+
+
     function rollDice() {
 
         if (!tenzies) {
@@ -185,7 +201,9 @@ export default function Main() {
 
 
     function selectDie(id) {
-        setTimeOn(true)
+        if (!timeOn) {
+            setTimeOn(true)
+        }
         setDieState(oldDice => {
             return oldDice.map(dice => {
                 return dice.id === id ? { ...dice, isHeld: !dice.isHeld } : dice
@@ -209,6 +227,66 @@ export default function Main() {
 
     let dieElement = dieState.map((dieNum, dieIndex) => {
         return <Die selectDie={() => selectDie(dieNum.id)} key={dieNum.id} value={dieNum.value} held={dieNum.isHeld} />
+    })
+
+    dieState.map(item => {
+        switch (item.value) {
+            case 1: return <div class="dice first-face">
+                <span class="dot"> </span>
+            </div>
+            case 2: return <div class="dice second-face">
+                <span class="dot">
+                </span>
+                <span class="dot">
+                </span>
+            </div>
+            case 3: return <div class="dice third-face">
+                <span class="dot"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
+            </div>
+
+            case 4: return <div class="fourth-face dice">
+                <div class="column">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <div class="column">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+            </div>
+            case 5: return <div class="fifth-face dice">
+
+                <div class="column">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+
+                <div class="column">
+                    <span class="dot"></span>
+                </div>
+
+                <div class="column">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+
+            </div>
+            case 6: return <div class="sixth-face dice">
+                <div class="column">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <div class="column">
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+
+            </div>
+        }
     })
 
 
