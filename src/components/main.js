@@ -1,6 +1,7 @@
 import React from "react"
 import Title from "./title"
 import Die from "./die"
+import DottedDie from "./dotteddie"
 import ShowInfo from "./showinfo"
 import RollButton from "./rollbutton"
 import { nanoid } from 'nanoid'
@@ -229,67 +230,71 @@ export default function Main() {
         return <Die selectDie={() => selectDie(dieNum.id)} key={dieNum.id} value={dieNum.value} held={dieNum.isHeld} />
     })
 
-    dieState.map(item => {
+
+    let dottedElements = dieState.map(item => {
+
+        const stylesDotted = {
+            backgroundColor: item.isHeld ? "green" : "white"
+        }
+
         switch (item.value) {
-            case 1: return <div class="dice first-face">
-                <span class="dot"> </span>
+            case 1: return <div style={stylesDotted} onClick={() => selectDie(item.id)} className="dice first-face">
+                <span className="dot"> </span>
             </div>
-            case 2: return <div class="dice second-face">
-                <span class="dot">
+            case 2: return <div style={stylesDotted} onClick={() => selectDie(item.id)} className="dice second-face">
+                <span className="dot">
                 </span>
-                <span class="dot">
+                <span className="dot">
                 </span>
             </div>
-            case 3: return <div class="dice third-face">
-                <span class="dot"></span>
-                <span class="dot"></span>
-                <span class="dot"></span>
+            case 3: return <div style={stylesDotted} onClick={() => selectDie(item.id)} className="dice third-face">
+                <span className="dot"></span>
+                <span className="dot"></span>
+                <span className="dot"></span>
             </div>
 
-            case 4: return <div class="fourth-face dice">
-                <div class="column">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
+            case 4: return <div style={stylesDotted} onClick={() => selectDie(item.id)} className="fourth-face dice">
+                <div className="column">
+                    <span className="dot"></span>
+                    <span className="dot"></span>
                 </div>
-                <div class="column">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
+                <div className="column">
+                    <span className="dot"></span>
+                    <span className="dot"></span>
                 </div>
             </div>
-            case 5: return <div class="fifth-face dice">
+            case 5: return <div style={stylesDotted} onClick={() => selectDie(item.id)} className="fifth-face dice">
 
-                <div class="column">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
+                <div className="column">
+                    <span className="dot"></span>
+                    <span className="dot"></span>
                 </div>
 
-                <div class="column">
-                    <span class="dot"></span>
+                <div className="column">
+                    <span className="dot"></span>
                 </div>
 
-                <div class="column">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
+                <div className="column">
+                    <span className="dot"></span>
+                    <span className="dot"></span>
                 </div>
 
             </div>
-            case 6: return <div class="sixth-face dice">
-                <div class="column">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
+            case 6: return <div style={stylesDotted} onClick={() => selectDie(item.id)} className="sixth-face dice">
+                <div className="column">
+                    <span className="dot"></span>
+                    <span className="dot"></span>
+                    <span className="dot"></span>
                 </div>
-                <div class="column">
-                    <span class="dot"></span>
-                    <span class="dot"></span>
-                    <span class="dot"></span>
+                <div className="column">
+                    <span className="dot"></span>
+                    <span className="dot"></span>
+                    <span className="dot"></span>
                 </div>
 
             </div>
         }
     })
-
-
 
 
     return (
@@ -302,6 +307,7 @@ export default function Main() {
                     <Title />
                     <div className="die-container">
                         {dieElement}
+                        {dottedElements}
                     </div>
                     <ShowInfo numRolls={numRolls} theTime={theTime} />
                     <RollButton tenzie={tenzies} handleClick={rollDice} />

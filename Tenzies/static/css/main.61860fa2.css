@@ -1,0 +1,208 @@
+@import url(https://fonts.googleapis.com/css2?family=Karla&display=swap);
+@import url(https://fonts.googleapis.com/css2?family=Inter&display=swap);
+
+* {
+    box-sizing: border-box;
+    font-family: Karla, sans-serif;
+    margin: 0
+}
+
+.conf {
+    align-items: center;
+    height: 464px;
+    margin: 69px auto 0;
+    width: 340px
+}
+
+.conf,
+.game-container {
+    display: flex;
+    justify-content: center
+}
+
+.game-container {
+    margin-bottom: 69px;
+    margin-top: 69px
+}
+
+.outer-frame {
+    background-color: #0b2434;
+    height: 464px;
+    justify-content: center;
+    position: relative;
+    width: 360px
+}
+
+.inner-frame,
+.outer-frame {
+    align-items: center;
+    display: flex
+}
+
+.inner-frame {
+    background-color: #f5f5f5;
+    border-radius: 10px;
+    flex-direction: column;
+    height: 425px;
+    width: 320px
+}
+
+.title {
+    font-size: 25.6px;
+    font-weight: 700;
+    line-height: 30px;
+    margin-top: 33.3px
+}
+
+.title,
+.title-paragraph {
+    letter-spacing: -.03em;
+    text-align: center
+}
+
+.title-paragraph {
+    font-family: Inter, sans-serif;
+    font-size: 13.11px;
+    font-weight: 400;
+    line-height: 16px;
+    width: 233px
+}
+
+.die {
+    align-items: center;
+    background-color: #fff;
+    border-radius: 3.81277px;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .15);
+    display: flex;
+    font-size: 20.6px;
+    height: 36px;
+    justify-content: center;
+    line-height: 24px;
+    margin-top: 23.1px;
+    width: 36px
+}
+
+.die,
+.roll-button {
+    font-weight: 700;
+    text-align: center
+}
+
+.roll-button {
+    background: #5035ff;
+    border: none;
+    border-radius: 3.8px;
+    box-shadow: 0 3.2px 7.68px rgba(0, 0, 0, .18);
+    color: #fff;
+    cursor: pointer;
+    font-size: 16.39px;
+    height: 50px;
+    letter-spacing: .03em;
+    line-height: 19px;
+    margin-top: 25px;
+    width: 100px
+}
+
+.showinfo-container {
+    display: flex;
+    gap: 50px;
+    margin-top: 30px
+}
+
+.roll-span,
+.time-span {
+    font-weight: 800
+}
+
+.best-container {
+    display: flex;
+    gap: 50px;
+    margin-top: 25px
+}
+
+.best-roll,
+.best-time {
+    background-color: #ff0;
+    border: 2px solid #000;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .15);
+    font-weight: 800;
+    padding: 3px
+}
+
+.roll-button:active {
+    box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, .7)
+}
+
+.die-container {
+    grid-gap: 18px;
+    grid-row-gap: 0;
+    display: grid;
+
+    grid-template: auto auto/repeat(5, 1fr)
+}
+
+.dice {
+    background-color: #fff;
+    border: 2px solid #000;
+    border-radius: 10%;
+    height: 36px;
+    padding: 4px;
+    width: 36px
+}
+
+.dot {
+    background-color: #000;
+    border-radius: 50%;
+    display: block;
+    height: 7px;
+    width: 7px
+}
+
+.first-face {
+    align-items: center;
+    display: flex;
+    justify-content: center
+}
+
+.second-face {
+    display: flex;
+    justify-content: space-between
+}
+
+.second-face .dot:nth-of-type(2) {
+    align-self: flex-end
+}
+
+.third-face {
+    display: flex;
+    justify-content: space-between
+}
+
+.third-face .dot:first-of-type {
+    align-self: flex-end
+}
+
+.third-face .dot:nth-of-type(2) {
+    align-self: center
+}
+
+.fifth-face,
+.fourth-face,
+.sixth-face {
+    display: flex;
+    justify-content: space-between
+}
+
+.fifth-face .column,
+.fourth-face .column,
+.sixth-face .column {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between
+}
+
+.fifth-face .column:nth-of-type(2) {
+    justify-content: center
+}
+
+/*# sourceMappingURL=main.61860fa2.css.map*/

@@ -1,4 +1,4 @@
-export default function Die(props) {
+export default function DottedDie(props) {
 
 
     const styles = {
@@ -9,5 +9,4 @@ export default function Die(props) {
         <div style={styles} onClick={props.selectDie} className="die" > {props.value} </div >
     )
 }
-
 
