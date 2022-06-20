@@ -69,7 +69,7 @@
 }
 
 .die {
-  display: flex;
+  display: none;
   margin-top: 23.1px;
   width: 36px;
   height: 36px;

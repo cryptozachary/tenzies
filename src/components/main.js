@@ -32,23 +32,7 @@ export default function Main() {
 
     const [timeScore, setTimeScore] = React.useState(localStorage.getItem("time") || "0")
 
-    const [dottedShow, setDottedShow] = React.useState(localStorage.getItem("type") || true)
-
-    function toggleShowType() {
-
-        setDottedShow(!dottedShow)
-        console.log(dottedShow)
-
-        switch (dottedShow) {
-            case true: return dottedDice.forEach(item => { item.setAttribute("style", "display:flex") }), numberDice.forEach(item => { item.setAttribute("style", "display:none") }), localStorage.setItem("Type", dottedShow)
-            case false: return dottedDice.forEach(item => { item.setAttribute("style", "display:none") }), numberDice.forEach(item => {
-                item.setAttribute("style", "display:flex")
-            }), localStorage.setItem("Type", dottedShow)
-        }
-    }
-
-
-
+    const [dottedShow, setDottedShow] = React.useState(localStorage.getItem("Type") || true)
 
 
     React.useEffect(() => {
@@ -62,7 +46,11 @@ export default function Main() {
             setTimeScore(timeScore)
         }
 
-        console.log("running initializer", timeScore, rollScore)
+        if (dottedShow) {
+            localStorage.setItem("Type", dottedShow)
+        }
+
+        console.log("running initializer", timeScore, rollScore, dottedShow)
 
 
         //testing out above time score
@@ -150,6 +138,19 @@ export default function Main() {
         }
 
     }, [dieState])
+
+    function toggleShowType() {
+
+        setDottedShow(!dottedShow)
+        console.log(dottedShow)
+
+        switch (dottedShow) {
+            case true: return dottedDice.forEach(item => { item.setAttribute("style", "display:flex") }), numberDice.forEach(item => { item.setAttribute("style", "display:none") }), localStorage.setItem("Type", dottedShow)
+            case false: return dottedDice.forEach(item => { item.setAttribute("style", "display:none") }), numberDice.forEach(item => {
+                item.setAttribute("style", "display:flex")
+            }), localStorage.setItem("Type", dottedShow)
+        }
+    }
 
     function time() {
 
@@ -249,7 +250,7 @@ export default function Main() {
     let dottedElements = dieState.map(item => {
 
         const stylesDotted = {
-            backgroundColor: item.isHeld ? "green" : "white"
+            backgroundColor: item.isHeld ? "#228B22" : "white"
         }
 
         switch (item.value) {

@@ -2,7 +2,7 @@ export default function Die(props) {
 
 
     const styles = {
-        backgroundColor: props.held ? "green" : "white"
+        backgroundColor: props.held ? "228B22" : "white"
     }
 
     return (
