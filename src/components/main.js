@@ -13,10 +13,10 @@ export default function Main() {
     let rollSpan = document.querySelector(".roll--span")
     let timeSpan = document.querySelector(".time--span")
     let timeCalc = document.querySelector(".time-calc-span")
+    let dottedDice = document.querySelectorAll(".dice")
+    let numberDice = document.querySelectorAll(".die")
     let newTime;
     let newRoll;
-
-
 
     const [dieState, setDieState] = React.useState(newDie())
 
@@ -32,6 +32,24 @@ export default function Main() {
 
     const [timeScore, setTimeScore] = React.useState(localStorage.getItem("time") || "0")
 
+    const [dottedShow, setDottedShow] = React.useState(localStorage.getItem("type") || true)
+
+    function toggleShowType() {
+
+        setDottedShow(!dottedShow)
+        console.log(dottedShow)
+
+        switch (dottedShow) {
+            case true: return dottedDice.forEach(item => { item.setAttribute("style", "display:flex") }), numberDice.forEach(item => { item.setAttribute("style", "display:none") }), localStorage.setItem("Type", dottedShow)
+            case false: return dottedDice.forEach(item => { item.setAttribute("style", "display:none") }), numberDice.forEach(item => {
+                item.setAttribute("style", "display:flex")
+            }), localStorage.setItem("Type", dottedShow)
+        }
+    }
+
+
+
+
 
     React.useEffect(() => {
         if (rollScore === "0") {
@@ -43,9 +61,6 @@ export default function Main() {
         } else {
             setTimeScore(timeScore)
         }
-
-
-
 
         console.log("running initializer", timeScore, rollScore)
 
@@ -238,22 +253,22 @@ export default function Main() {
         }
 
         switch (item.value) {
-            case 1: return <div style={stylesDotted} onClick={() => selectDie(item.id)} className="dice first-face">
+            case 1: return <div key={item.id} style={stylesDotted} onClick={() => selectDie(item.id)} className="dice first-face">
                 <span className="dot"> </span>
             </div>
-            case 2: return <div style={stylesDotted} onClick={() => selectDie(item.id)} className="dice second-face">
+            case 2: return <div key={item.id} style={stylesDotted} onClick={() => selectDie(item.id)} className="dice second-face">
                 <span className="dot">
                 </span>
                 <span className="dot">
                 </span>
             </div>
-            case 3: return <div style={stylesDotted} onClick={() => selectDie(item.id)} className="dice third-face">
+            case 3: return <div key={item.id} style={stylesDotted} onClick={() => selectDie(item.id)} className="dice third-face">
                 <span className="dot"></span>
                 <span className="dot"></span>
                 <span className="dot"></span>
             </div>
 
-            case 4: return <div style={stylesDotted} onClick={() => selectDie(item.id)} className="fourth-face dice">
+            case 4: return <div key={item.id} style={stylesDotted} onClick={() => selectDie(item.id)} className="fourth-face dice">
                 <div className="column">
                     <span className="dot"></span>
                     <span className="dot"></span>
@@ -263,7 +278,7 @@ export default function Main() {
                     <span className="dot"></span>
                 </div>
             </div>
-            case 5: return <div style={stylesDotted} onClick={() => selectDie(item.id)} className="fifth-face dice">
+            case 5: return <div key={item.id} style={stylesDotted} onClick={() => selectDie(item.id)} className="fifth-face dice">
 
                 <div className="column">
                     <span className="dot"></span>
@@ -280,7 +295,7 @@ export default function Main() {
                 </div>
 
             </div>
-            case 6: return <div style={stylesDotted} onClick={() => selectDie(item.id)} className="sixth-face dice">
+            case 6: return <div key={item.id} style={stylesDotted} onClick={() => selectDie(item.id)} className="sixth-face dice">
                 <div className="column">
                     <span className="dot"></span>
                     <span className="dot"></span>
@@ -304,7 +319,7 @@ export default function Main() {
             <div className="outer-frame">
                 <div className="inner-frame">
 
-                    <Title />
+                    <Title toggleShowType={toggleShowType} />
                     <div className="die-container">
                         {dieElement}
                         {dottedElements}

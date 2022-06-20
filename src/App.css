@@ -51,7 +51,6 @@
 }
 
 .title {
-  margin-top: 33.3px;
   font-weight: 700;
   font-size: 25.6px;
   line-height: 30px;
@@ -145,4 +144,23 @@
   grid-template: auto auto / repeat(5, 1fr);
   gap: 18px;
   grid-row-gap: 0px;
+}
+
+.toggle-button {
+  margin-top: 15px;
+  display: inline-flex;
+  width: 15px;
+  height: 15px;
+}
+
+.toggle-button-down {
+  margin-top: 15px;
+  display: inline-flex;
+  width: 15px;
+  height: 15px;
+  box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
+}
+
+.toggle-button:active {
+  box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
 }
