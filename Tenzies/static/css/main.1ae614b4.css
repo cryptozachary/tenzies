@@ -51,7 +51,7 @@
     font-size: 25.6px;
     font-weight: 700;
     line-height: 30px;
-    margin-top: 33.3px
+    margin-top: 33.1px
 }
 
 .title,
@@ -73,7 +73,7 @@
     background-color: #fff;
     border-radius: 3.81277px;
     box-shadow: 0 2px 2px rgba(0, 0, 0, .15);
-    display: flex;
+    display: none;
     font-size: 20.6px;
     height: 36px;
     justify-content: center;
@@ -137,15 +137,29 @@
     grid-gap: 18px;
     grid-row-gap: 0;
     display: grid;
-
     grid-template: auto auto/repeat(5, 1fr)
+}
+
+.toggle-button,
+.toggle-button-down {
+    display: inline-flex;
+    height: 15px;
+    margin-top: 15px;
+    width: 15px
+}
+
+.toggle-button-down,
+.toggle-button:active {
+    box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, .7)
 }
 
 .dice {
     background-color: #fff;
     border: 2px solid #000;
     border-radius: 10%;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, .15);
     height: 36px;
+    margin-top: 23.1px;
     padding: 4px;
     width: 36px
 }
@@ -205,4 +219,4 @@
     justify-content: center
 }
 
-/*# sourceMappingURL=main.61860fa2.css.map*/
+/*# sourceMappingURL=main.1ae614b4.css.map*/

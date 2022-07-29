@@ -43,25 +43,30 @@ export default function Main() {
         if (timeScore == "0") {
             localStorage.setItem("time", 0)
         } else {
-            setTimeScore(timeScore)
+            setTimeScore(prev => {
+                let newScoreString = `0:${prev?.slice(0, 2)}`
+                return newScoreString
+            })
         }
 
         if (dottedShow) {
             localStorage.setItem("Type", dottedShow)
+        } else {
+            localStorage.setItem("Type", false)
         }
 
         console.log("running initializer", timeScore, rollScore, dottedShow)
 
 
         //testing out above time score
-        //let newScoreString = `0:${prev?.slice(0, 2)}`
-
+        //`
 
     }, [])
 
-
-
     React.useEffect(() => {
+
+        let convertedScore = localStorage.getItem("time")
+        console.log(convertedScore)
 
         if (tenzies) {
             console.log(`the #rolls is ${numRolls}`)
@@ -89,7 +94,7 @@ export default function Main() {
             console.log(`the time is ${theTime}`)
             console.log(`the best time score is ${timeScore}`)
 
-            if (timeScore > theTime) {
+            if (convertedScore > theTime) {
                 newTime = true
                 localStorage.setItem("time", JSON.stringify(theTime))
                 setTimeScore(timeSpan.textContent)
@@ -139,18 +144,27 @@ export default function Main() {
 
     }, [dieState])
 
+
+
     function toggleShowType() {
+        setDottedShow(prev => {
+            let newShow = !prev
+            return newShow
+        })
 
-        setDottedShow(!dottedShow)
-        console.log(dottedShow)
+    }
 
+    React.useEffect(() => {
+        console.log("showtype running")
         switch (dottedShow) {
-            case true: return dottedDice.forEach(item => { item.setAttribute("style", "display:flex") }), numberDice.forEach(item => { item.setAttribute("style", "display:none") }), localStorage.setItem("Type", dottedShow)
-            case false: return dottedDice.forEach(item => { item.setAttribute("style", "display:none") }), numberDice.forEach(item => {
-                item.setAttribute("style", "display:flex")
+            case true: return [...dottedDice].map(item => { item.style.display = "flex"; }), [...numberDice].map(item => { item.style.display = "none"; }), localStorage.setItem("Type", dottedShow)
+            case false: return [...dottedDice].map(item => { item.style.display = "none"; }), [...numberDice].map(item => {
+                item.style.display = "flex";
             }), localStorage.setItem("Type", dottedShow)
         }
-    }
+
+    }, [dottedShow])
+
 
     function time() {
 
